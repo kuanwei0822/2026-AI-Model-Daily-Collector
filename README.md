@@ -26,7 +26,7 @@
 
 ## 架構總覽
 
-![架構圖](docs/architecture-v1.svg)
+![架構圖](docs/architecture-v1.png)
 
 兩個任務完全分開：
 
@@ -45,7 +45,7 @@
 | GitHub Token、Repo、Commit 等敏感資訊外洩 | Agent 完全不接觸 GitHub，也不持有任何 GitHub 憑證 |
 | Agent 被惡意利用，對 Repo 做破壞性操作 | 不讓 Agent 執行 git 指令；commit / push 一律由人手動進行 |
 | 網頁內容夾帶 Prompt Injection（例如惡意指令、可疑連結被寫進報告） | 報告公開前一律人工檢查 diff；蒐集任務只能使用 WebSearch / WebFetch |
-| 蒐集任務 Agent 無法接觸到本機檔案 | 蒐集任務跑在雲端，無法存取本機 |
+| 蒐集任務 Agent 接觸到本機檔案 | 蒐集任務跑在雲端，無法存取本機 |
 | 同步任務 Agent 誤改或刪除本地檔案 | 同步任務只能寫入固定路徑，不修改、改名或刪除既有檔案 |
 
 **Hard Action**：
@@ -81,9 +81,9 @@
 
 1. 讀取「每日模型情報 — 索引」Doc，取得所有報告清單。
 2. 逐日比對 Doc 的 rev 與本地 `manifest.json`：
-    - 本地沒有這份報告 → 新增 v1
-    - rev 相同 → 跳過
-    - rev 不同 → 新增下一個版本，舊版本保留
+   - 本地沒有這份報告 → 新增 v1
+   - rev 相同 → 跳過
+   - rev 不同 → 新增下一個版本，舊版本保留
 3. 將報告匯出為 Markdown，寫入 `reports/YYYYMMDD/`。
 
 ### 4. 上 GitHub：人工 commit / push
@@ -95,6 +95,24 @@ git add reports/
 git commit -m "reports: YYYY-MM-DD"
 git push
 ```
+
+## Prompt
+
+| 檔案 | 任務 | 觸發方式 |
+| --- | --- | --- |
+| [daily-model-intel.md](docs/daily-model-intel.md) | 蒐集模型情報，存成 Claude Docs 報告並更新索引 | Anthropic Claude Scheduler（每日自動） |
+| [daily-model-pull.md](docs/daily-model-pull.md) | 將 Claude Docs 報告匯出到本地 `reports/` | Anthropic Claude Scheduler（手動觸發） |
+
+同步任務使用前，需將 `<REPO_PATH>` 替換為本地 repo 的完整路徑。索引 Doc 會依標題「每日模型情報 — 索引」自動尋找，不需手動填入連結。
+
+兩份 prompt 開頭都有「執行前檢查」：佔位符未替換、資料夾未連線或工具無法使用時，Agent 會先停下來提問。
+
+第一次使用時，請先執行一次蒐集任務，再執行同步任務：
+
+1. 蒐集任務第一次執行時，會自動建立當日報告 Doc 與「每日模型情報 — 索引」Doc。
+2. 同步任務若找不到任何報告 Doc，會提醒先執行蒐集任務，並且不建立任何檔案。
+
+> repo 中的 prompt 為版控副本，修改時請同步更新排程任務中的 prompt。
 
 ## 蒐集範圍
 
@@ -152,11 +170,11 @@ git push
 
 ```json
 {
-  "date": "YYYY-MM-DD",
-  "doc_url": "",
-  "versions": [
-    { "version": 1, "file": "model-intel_YYYYMMDD_v1.md", "rev": 1, "pulled_at": "YYYY-MM-DDTHH:MM:SS+08:00" }
-  ]
+   "date": "YYYY-MM-DD",
+   "doc_url": "",
+   "versions": [
+      { "version": 1, "file": "model-intel_YYYYMMDD_v1.md", "rev": 1, "pulled_at": "YYYY-MM-DDTHH:MM:SS+08:00" }
+   ]
 }
 ```
 
@@ -165,14 +183,11 @@ git push
 ```
 2026-AI-Model-Daily-Collector/
 ├── README.md
-├── docs/                             # （規劃中）
-│   ├── architecture.md               # 方案比較與架構細節
-│   ├── security.md                   # 威脅模型與防護清單
-│   └── decisions/                    # ADR（架構決策紀錄）
-├── deploy/                           # （規劃中）
-│   ├── systemd/                      # 自建主機排程
-│   ├── k8s/                          # Kubernetes 部署
-│   └── aws/                          # AWS 雲端方案（Terraform）
+├── docs/
+│   ├── architecture-v1.png           # 架構圖（README 使用）
+│   ├── architecture-v1.svg           # 架構圖原始檔
+│   ├── daily-model-intel.md          # 蒐集任務 prompt（排程）
+│   └── daily-model-pull.md           # 同步任務 prompt（手動）
 └── reports/
     ├── 20261119/                     # 第一天手動建立，尚未套用版本規則
     │   └── model-intel.md
