@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="800" viewBox="0 0 1420 800" font-family="'Noto Sans CJK TC','PingFang TC','Microsoft JhengHei',sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrWarn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+
+  <rect width="1420" height="800" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="710" y="62" font-size="26" font-weight="700" fill="#0f172a" text-anchor="middle">AI-Model-Daily-Collector 架構</text>
+
+  <!-- Zones -->
+  <rect x="300" y="100" width="460" height="660" rx="16" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <text x="324" y="132" font-size="17" font-weight="700" fill="#1d4ed8">雲端（Anthropic Claude）</text>
+  <text x="324" y="154" font-size="13" fill="#3b82f6">自動・每日</text>
+
+  <rect x="820" y="100" width="360" height="660" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <text x="844" y="132" font-size="17" font-weight="700" fill="#15803d">本地端（使用者電腦）</text>
+  <text x="844" y="154" font-size="13" fill="#16a34a">手動觸發</text>
+
+  <!-- Web sources (external) -->
+  <rect x="40" y="350" width="210" height="110" rx="12" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="145" y="385" font-size="17" font-weight="700" fill="#9a3412" text-anchor="middle">公開網頁來源</text>
+  <text x="145" y="410" font-size="13" fill="#7c2d12" text-anchor="middle">官方 blog・release notes</text>
+  <text x="145" y="430" font-size="13" fill="#7c2d12" text-anchor="middle">GitHub releases・Hugging Face</text>
+
+  <!-- Cloud boxes -->
+  <rect x="340" y="180" width="380" height="96" rx="12" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="368" cy="208" r="14" fill="#1d4ed8"/><text x="368" y="213" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+  <text x="392" y="214" font-size="18" font-weight="700" fill="#0f172a">Anthropic Claude Scheduler</text>
+  <text x="392" y="242" font-size="14" fill="#475569">每天固定時間觸發（週一涵蓋 72 小時）</text>
+
+  <rect x="340" y="350" width="380" height="110" rx="12" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="368" cy="378" r="14" fill="#1d4ed8"/><text x="368" y="383" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+  <text x="392" y="384" font-size="18" font-weight="700" fill="#0f172a">蒐集任務 Agent</text>
+  <text x="392" y="412" font-size="14" fill="#475569">只用 WebSearch / WebFetch</text>
+  <text x="392" y="434" font-size="14" fill="#475569">產出固定格式報告 + JSON</text>
+
+  <rect x="340" y="534" width="380" height="140" rx="12" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="368" cy="562" r="14" fill="#1d4ed8"/><text x="368" y="567" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+  <text x="392" y="568" font-size="18" font-weight="700" fill="#0f172a">Claude Docs</text>
+  <rect x="372" y="588" width="316" height="32" rx="6" fill="#dbeafe"/>
+  <text x="388" y="609" font-size="14" fill="#1e3a8a">每日模型情報 YYYY-MM-DD</text>
+  <rect x="372" y="628" width="316" height="32" rx="6" fill="#dbeafe"/>
+  <text x="388" y="649" font-size="14" fill="#1e3a8a">每日模型情報 — 索引</text>
+
+  <text x="530" y="728" font-size="13.5" fill="#1d4ed8" text-anchor="middle">隔離：無 GitHub 憑證，無法存取本機</text>
+
+  <!-- Local boxes -->
+  <rect x="850" y="180" width="300" height="96" rx="12" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <circle cx="878" cy="208" r="14" fill="#15803d"/><text x="878" y="213" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+  <text x="902" y="214" font-size="18" font-weight="700" fill="#0f172a">同步任務 Agent</text>
+  <text x="902" y="242" font-size="14" fill="#475569">Claude 桌面版・手動觸發</text>
+
+  <rect x="850" y="350" width="300" height="110" rx="12" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <circle cx="878" cy="378" r="14" fill="#15803d"/><text x="878" y="383" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+  <text x="902" y="384" font-size="18" font-weight="700" fill="#0f172a">本地 Git Repo</text>
+  <text x="902" y="412" font-size="14" fill="#475569">reports/YYYYMMDD/</text>
+  <text x="902" y="434" font-size="14" fill="#475569">v1, v2… + manifest.json</text>
+
+  <rect x="850" y="534" width="300" height="140" rx="12" fill="#ffffff" stroke="#16a34a" stroke-width="2.5"/>
+  <circle cx="878" cy="562" r="14" fill="#15803d"/><text x="878" y="567" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+  <text x="902" y="568" font-size="18" font-weight="700" fill="#0f172a">人工檢查 diff</text>
+  <text x="902" y="598" font-size="14" fill="#475569">確認無 Prompt Injection</text>
+  <text x="902" y="620" font-size="14" fill="#475569">手動 git commit / push</text>
+
+  <text x="1000" y="728" font-size="13.5" fill="#15803d" text-anchor="middle">限制：只寫 reports/，不執行 git</text>
+
+  <!-- GitHub -->
+  <rect x="1230" y="556" width="160" height="96" rx="12" fill="#0f172a"/>
+  <text x="1310" y="597" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">GitHub</text>
+  <text x="1310" y="622" font-size="13" fill="#cbd5e1" text-anchor="middle">公開 Repo</text>
+
+  <!-- Arrows -->
+  <line x1="530" y1="276" x2="530" y2="346" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="530" y1="460" x2="530" y2="530" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="542" y="500" font-size="13" fill="#475569">寫入報告・更新索引</text>
+
+  <line x1="250" y1="405" x2="336" y2="405" stroke="#c2410c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrWarn)"/>
+
+  <polyline points="720,604 790,604 790,228 846,228" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="756" y="398" width="68" height="44" rx="6" fill="#ffffff"/>
+  <text x="790" y="416" font-size="13" fill="#475569" text-anchor="middle">讀取</text>
+  <text x="790" y="434" font-size="13" fill="#475569" text-anchor="middle">export</text>
+
+  <line x1="1000" y1="276" x2="1000" y2="346" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="1000" y1="460" x2="1000" y2="530" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+
+  <line x1="1150" y1="604" x2="1226" y2="604" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="1205" y="594" font-size="13" fill="#475569" text-anchor="middle">push</text>
+</svg>
