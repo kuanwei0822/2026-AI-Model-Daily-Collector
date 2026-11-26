@@ -1,0 +1,61 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+
+      "WebFetch(domain:anthropic.com)",
+      "WebFetch(domain:*.anthropic.com)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:*.claude.com)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:*.openai.com)",
+      "WebFetch(domain:blog.google)",
+      "WebFetch(domain:ai.google.dev)",
+      "WebFetch(domain:developers.googleblog.com)",
+      "WebFetch(domain:deepmind.google)",
+      "WebFetch(domain:x.ai)",
+      "WebFetch(domain:*.x.ai)",
+      "WebFetch(domain:mistral.ai)",
+      "WebFetch(domain:*.mistral.ai)",
+      "WebFetch(domain:cohere.com)",
+      "WebFetch(domain:*.cohere.com)",
+
+      "WebFetch(domain:ai.meta.com)",
+      "WebFetch(domain:llama.com)",
+      "WebFetch(domain:*.llama.com)",
+      "WebFetch(domain:qwen.ai)",
+      "WebFetch(domain:*.qwen.ai)",
+      "WebFetch(domain:qwenlm.github.io)",
+      "WebFetch(domain:deepseek.com)",
+      "WebFetch(domain:*.deepseek.com)",
+      "WebFetch(domain:z.ai)",
+      "WebFetch(domain:*.z.ai)",
+      "WebFetch(domain:moonshot.ai)",
+      "WebFetch(domain:*.moonshot.ai)",
+      "WebFetch(domain:moonshotai.github.io)",
+      "WebFetch(domain:huggingface.co)",
+
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.vllm.ai)",
+      "WebFetch(domain:blog.vllm.ai)",
+      "WebFetch(domain:docs.sglang.ai)",
+      "WebFetch(domain:lmsys.org)",
+      "WebFetch(domain:ollama.com)",
+      "WebFetch(domain:developer.nvidia.com)",
+      "WebFetch(domain:docs.nvidia.com)",
+
+      "WebFetch(domain:lmarena.ai)",
+      "WebFetch(domain:*.lmarena.ai)",
+      "WebFetch(domain:swebench.com)",
+      "WebFetch(domain:www.swebench.com)",
+      "WebFetch(domain:artificialanalysis.ai)",
+
+      "WebFetch(domain:aws.amazon.com)",
+      "WebFetch(domain:docs.aws.amazon.com)",
+      "WebFetch(domain:azure.microsoft.com)",
+      "WebFetch(domain:learn.microsoft.com)",
+      "WebFetch(domain:techcommunity.microsoft.com)",
+      "WebFetch(domain:cloud.google.com)"
+    ]
+  }
+}
